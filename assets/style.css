@@ -1,0 +1,15 @@
+.reveal h1,
+.reveal h2 {
+    text-transform: none;
+}
+
+.reveal section img {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.reveal strong,
+.reveal b {
+    color: #00a9ff;
+}

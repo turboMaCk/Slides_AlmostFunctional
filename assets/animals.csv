@@ -1,0 +1,7 @@
+,type,environment,color,legs,age
+Kitten,mammal,ground,[any],4,[any]
+Puppy,mammal,ground,[any],4,[any]
+Fish,fish,water,x,0,[any]
+Snake,reptile,groud,x,0,[any]
+Whale,mammal,water,x,0,[any]
+Toutle,reptile,water/ground,x,4,[any]
