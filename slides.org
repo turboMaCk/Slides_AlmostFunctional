@@ -750,7 +750,7 @@
 
    ~ Brian Lonsdorf: Hey Underscore, You're Doing it Wrong!
 
-** Curring
+** Currying
 
    In mathematics and computer science, currying is the technique of translating the evaluation of a function that takes multiple arguments (or a tuple of arguments) into evaluating a sequence of functions, each with a single argument.
 
@@ -800,11 +800,11 @@
    var _ = require('lodash');
    // Load the core build.
    var _ = require('lodash/core');
-   // Load the fp build for immutable auto-curried iteratee-first data-last methods.
+   // Load the fp build for immutable auto-curryied iteratee-first data-last methods.
    var fp = require('lodash/fp');
    #+END_SRC
 
-** JavaScript native curring
+** JavaScript native currying
 
    #+BEGIN_SRC javascript
    function add(a, b) {
