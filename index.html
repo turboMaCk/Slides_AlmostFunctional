@@ -27,7 +27,7 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Almost Functional</h1><h2 class="author">Marek Fajkus</h2><p class="date">Created: 2016-06-23 Thu 11:42</p>
+<section id="sec-title-slide"><h1 class="title">Almost Functional</h1><h2 class="author">Marek Fajkus</h2><p class="date">Created: 2016-06-23 Thu 11:53</p>
 </section>
 <section id="table-of-contents">
 <div id="table-of-contents">
@@ -804,7 +804,7 @@ In languages with lexical scope (also called static scope), name <b>resolution d
 #+BEGIN_SRC javascript
 function wrap(a) {
   return function() {
-    return a'
+    return a;
   }
 }
 wrap('hello')() // =&gt; 'hello'

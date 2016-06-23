@@ -413,7 +413,7 @@
    #+BEGIN_SRC javascript
    function wrap(a) {
      return function() {
-       return a'
+       return a;
      }
    }
    wrap('hello')() // => 'hello'
