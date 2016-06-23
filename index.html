@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="English">
+<head>
+<meta charset="utf-8"/>
+<title>Almost Functional</title>
+<meta name="author" content="(Marek Fajkus)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="assets/style.css"/>
+<link rel="stylesheet" href="./reveal.js/lib/css/zenburn.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Almost Functional</h1><h2 class="author">Marek Fajkus</h2><p class="date">Created: 2016-06-23 Thu 11:42</p>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-orgheadline2">About me</a>
+<ul>
+<li><a href="#/slide-orgheadline1">Company</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline8">Purpose</a>
+<ul>
+<li><a href="#/slide-orgheadline3">Complexity</a></li>
+<li><a href="#/slide-orgheadline4">Be better</a></li>
+<li><a href="#/slide-orgheadline5">What we will be talking about?</a></li>
+<li><a href="#/slide-orgheadline6">What we will not be talking about</a></li>
+<li><a href="#/slide-orgheadline7">Before we start</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline18">Computation</a>
+<ul>
+<li><a href="#/slide-orgheadline9">History</a></li>
+<li><a href="#/slide-orgheadline11">Turing machine</a>
+<ul>
+<li><a href="#/slide-orgheadline10">Effects</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline12">Digital</a></li>
+<li><a href="#/slide-orgheadline13">von Neumann architecture</a></li>
+<li><a href="#/slide-orgheadline14">Abstractions</a></li>
+<li><a href="#/slide-orgheadline15">λ-calculus</a></li>
+<li><a href="#/slide-orgheadline16">More abstractions - Actor Model</a></li>
+<li><a href="#/slide-orgheadline17">Why I think this is (kind of) important?</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline38">JavaScript</a>
+<ul>
+<li><a href="#/slide-orgheadline19">Language</a></li>
+<li><a href="#/slide-orgheadline20">MDN said..</a></li>
+<li><a href="#/slide-orgheadline21">Functional?</a></li>
+<li><a href="#/slide-orgheadline22">Ask author</a></li>
+<li><a href="#/slide-orgheadline23">JS: The Best Parts</a></li>
+<li><a href="#/slide-orgheadline24">Ehm&#x2026;</a></li>
+<li><a href="#/slide-orgheadline25">Important stuff</a></li>
+<li><a href="#/slide-orgheadline26">Weak typing</a></li>
+<li><a href="#/slide-orgheadline27">First class functions</a></li>
+<li><a href="#/slide-orgheadline28">Higher Order Function</a></li>
+<li><a href="#/slide-orgheadline29">Function Scoping</a></li>
+<li><a href="#/slide-orgheadline30">Lexical function scope</a></li>
+<li><a href="#/slide-orgheadline31">ES2015 and block scope</a></li>
+<li><a href="#/slide-orgheadline32">Prototype based OOP</a></li>
+<li><a href="#/slide-orgheadline33">Java</a></li>
+<li><a href="#/slide-orgheadline34">No implicit return</a></li>
+<li><a href="#/slide-orgheadline35">Examples</a></li>
+<li><a href="#/slide-orgheadline36">Conclusion</a></li>
+<li><a href="#/slide-orgheadline37">More resources</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline50">OOP vs Functional</a>
+<ul>
+<li><a href="#/slide-orgheadline39">Why OOP?</a></li>
+<li><a href="#/slide-orgheadline40">Classes sux so much&#x2026;</a></li>
+<li><a href="#/slide-orgheadline41">Minimum Product</a></li>
+<li><a href="#/slide-orgheadline42">Next iteration</a></li>
+<li><a href="#/slide-orgheadline43">Fish &amp; Snakes</a></li>
+<li><a href="#/slide-orgheadline44">Getting worse</a></li>
+<li><a href="#/slide-orgheadline45">Good code</a></li>
+<li><a href="#/slide-orgheadline46">The Problem with Classes</a></li>
+<li><a href="#/slide-orgheadline47">Data</a></li>
+<li><a href="#/slide-orgheadline48">OOP thinking</a></li>
+<li><a href="#/slide-orgheadline49">More resources</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline65">Functional programming</a>
+<ul>
+<li><a href="#/slide-orgheadline51">Function</a></li>
+<li><a href="#/slide-orgheadline52">Functions</a></li>
+<li><a href="#/slide-orgheadline53">Fibonacci number</a></li>
+<li><a href="#/slide-orgheadline54">Imperative optimization</a></li>
+<li><a href="#/slide-orgheadline55">Tail recursion</a></li>
+<li><a href="#/slide-orgheadline56">Lodash / Underscore</a></li>
+<li><a href="#/slide-orgheadline57">Curring</a></li>
+<li><a href="#/slide-orgheadline58">Currying vs underscore</a></li>
+<li><a href="#/slide-orgheadline59">Lodash</a></li>
+<li><a href="#/slide-orgheadline60">JavaScript native curring</a></li>
+<li><a href="#/slide-orgheadline61">Function composition</a></li>
+<li><a href="#/slide-orgheadline62">Functional thinking</a></li>
+<li><a href="#/slide-orgheadline63">Solving problems functionaly</a></li>
+<li><a href="#/slide-orgheadline64">More resources</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline78">Type Safety</a>
+<ul>
+<li><a href="#/slide-orgheadline66">Types &amp; Memory</a></li>
+<li><a href="#/slide-orgheadline67">Java primitives</a></li>
+<li><a href="#/slide-orgheadline68">Type safety</a></li>
+<li><a href="#/slide-orgheadline69"><del>Type</del> Memory safety</a></li>
+<li><a href="#/slide-orgheadline70">Sets, Type theory, Category theory</a></li>
+<li><a href="#/slide-orgheadline71">Runtime errors</a></li>
+<li><a href="#/slide-orgheadline72">..Runtime errors</a></li>
+<li><a href="#/slide-orgheadline73">Functions for types</a></li>
+<li><a href="#/slide-orgheadline74">Functor</a></li>
+<li><a href="#/slide-orgheadline75">Lets implement some functor&#x2026; in JS</a></li>
+<li><a href="#/slide-orgheadline76">Learn more</a></li>
+<li><a href="#/slide-orgheadline77">Compile to JS?</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgheadline79">Thank you!</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<section id="slide-orgheadline2">
+<h2 id="orgheadline2">About me</h2>
+<p>
+Summary:
+</p>
+
+<ul>
+<li>JavaScript and Ruby developer</li>
+<li>Functional programming and opensource fanboy</li>
+<li>Living in Brno</li>
+
+</ul>
+
+<p>
+Contact:
+</p>
+
+<ul>
+<li>github: github.com/turboMaCk</li>
+<li>twitter: @turbo_MaCk</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline1">
+<h3 id="orgheadline1">Company</h3>
+
+<div class="figure">
+<p><img src="./assets/gwi-logo.png" alt="gwi-logo.png" />
+</p>
+</div>
+
+<ul>
+<li class="fragment roll-in">London based, small remote team</li>
+<li class="fragment roll-in">REST api, Single Page app, SQL + NOSQL, Micro services (kind of)</li>
+<li class="fragment roll-in">Ember.js, D3.js, Rails, Grape, ElasticSearch, PostgreSQL, Scala, Druid, Kafka, Spark, Docker&#x2026;</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline8">
+<h2 id="orgheadline8">Purpose</h2>
+<aside class="notes">
+<ul>
+<li>American architect, systems theorist, author, designer and inventor</li>
+
+</ul>
+
+</aside>
+
+<p>
+When I am working on a problem I never think about beauty. I think only how to solve the problem. But when I have finished, if the solution is not beautiful, I know it is wrong.
+</p>
+
+<p>
+~ R. Buckminster Fuller
+</p>
+
+</section>
+<section id="slide-orgheadline3">
+<h3 id="orgheadline3">Complexity</h3>
+<aside class="notes">
+<ul>
+<li>Rich Hickey (Simplicity Matters)</li>
+
+</ul>
+
+</aside>
+
+<p>
+The computing scientist’s main challenge is not to get confused by the complexities of his own making.
+</p>
+
+<p>
+~ E. W. Dijkstra
+</p>
+
+</section>
+<section id="slide-orgheadline4">
+<h3 id="orgheadline4">Be better</h3>
+<p>
+The best is the enemy of the good.
+</p>
+
+<p>
+~ Voltaire
+</p>
+
+</section>
+<section id="slide-orgheadline5">
+<h3 id="orgheadline5">What we will be talking about?</h3>
+<aside class="notes">
+<ul>
+<li>how we are building things?</li>
+<li>what are the primitives</li>
+<li>which composition do we use</li>
+
+</ul>
+
+</aside>
+
+<ul>
+<li class="fragment roll-in">Computation</li>
+<li class="fragment roll-in">JavaScript (language) design</li>
+<li class="fragment roll-in">OOP</li>
+<li class="fragment roll-in">Programming with functions</li>
+<li class="fragment roll-in">Types (just a little bit)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline6">
+<h3 id="orgheadline6">What we will not be talking about</h3>
+<ul>
+<li class="fragment roll-in">Frameworks</li>
+<li class="fragment roll-in">Tools</li>
+<li class="fragment roll-in">Functional Reactive Programming (FRP)</li>
+<li class="fragment roll-in">Concurrency</li>
+<li class="fragment roll-in">Monoids, Monads&#x2026;</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline7">
+<h3 id="orgheadline7">Before we start</h3>
+<ul>
+<li class="fragment appear">If you do not understand something, ask</li>
+<li class="fragment appear">I'm not a genius</li>
+<li class="fragment appear">I'm not even smarter than you</li>
+<li class="fragment appear">Say something if you think I'm wrong</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline18">
+<h2 id="orgheadline18">Computation</h2>
+<p>
+Computation is any type of calculation that follows a well-defined model understood and expressed as, for example, an algorithm.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+
+</section>
+<section id="slide-orgheadline9">
+<h3 id="orgheadline9">History</h3>
+<aside class="notes">
+<ul>
+<li>Alan (Mathison) Turing</li>
+<li>computer scientist, mathematician, logician, cryptanalyst and theoretical biologist</li>
+<li>general purpose computer</li>
+<li>1912 - 1954</li>
+<li>Finite-state machine (Konečný automat)</li>
+<li>Pushdown automaton (Zásobníkový automat)</li>
+
+</ul>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="./assets/turing.jpg" alt="turing.jpg" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline11">
+<h3 id="orgheadline11">Turing machine</h3>
+<aside class="notes">
+<ul>
+<li>Single tapped turing machine</li>
+<li>The machine operates on an infinite memory tape divided into cells.</li>
+<li>invented in 1936</li>
+<li>a-machine (automatic machine)</li>
+<li>Decision problem</li>
+<li>not random-access memory</li>
+
+</ul>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="./assets/turing-machine.png" alt="turing-machine.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline10">
+<h4 id="orgheadline10">Effects</h4>
+<aside class="notes">
+<ul>
+<li>subrutines</li>
+
+</ul>
+
+</aside>
+
+<p>
+With this model Turing was able to answer this two questions:
+</p>
+
+<ul>
+<li class="fragment appear">Does a machine exist that can determine whether any arbitrary machine on its tape is "circular"?
+<ul>
+<li class="fragment appear"><b>NO</b></li>
+
+</ul></li>
+<li class="fragment appear">Does a machine exist that can determine whether any arbitrary machine on its tape ever prints a given symbol?
+<ul>
+<li class="fragment appear"><b>NO</b></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline12">
+<h3 id="orgheadline12">Digital</h3>
+<aside class="notes">
+<ul>
+<li>John von Neumann</li>
+<li>Hungarian-American pure and applied mathematician, physicist, inventor, computer scientist, and polymath</li>
+
+</ul>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="./assets/von-neumann.gif" alt="von-neumann.gif" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline13">
+<h3 id="orgheadline13">von Neumann architecture</h3>
+<aside class="notes">
+<ul>
+<li>aka Princeton architecture</li>
+<li>stored-program system</li>
+<li>random-access memory</li>
+<li>non fixed programs</li>
+<li>alternative Harvard architecture</li>
+<li>invented in 1945</li>
+<li>instruction fetch and a data operation cannot occur at the same time because they share a common bus</li>
+
+</ul>
+
+</aside>
+
+<p>
+This describes a design architecture for an electronic digital computer with parts consisting of a processing unit containing an arithmetic logic unit and processor registers, a control unit containing an instruction register and program counter, <b>a memory to store both data and instructions</b>, external mass storage, and input and output mechanisms.
+</p>
+
+<p class="fragment (appear)">
+Ability to treat instructions as data is what makes assemblers, compilers, linkers, loaders, and other automated programming tools possible.
+</p>
+
+<p class="fragment (appear)">
+Memory overflow invented &lt;3
+</p>
+
+</section>
+<section id="slide-orgheadline14">
+<h3 id="orgheadline14">Abstractions</h3>
+<aside class="notes">
+<ul>
+<li>Alonzo Church</li>
+<li>1903 - 1995</li>
+<li>Church–Turing thesis</li>
+<li>SQL is not Church turing complete</li>
+
+</ul>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="./assets/alonzo-church.jpg" alt="alonzo-church.jpg" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline15">
+<h3 id="orgheadline15">λ-calculus</h3>
+<aside class="notes">
+<ul>
+<li>1930s</li>
+<li>Kleene–Rosser paradox + Curry's paradox</li>
+<li>Only anonymous functions</li>
+<li>All functions has only one argument</li>
+
+</ul>
+
+</aside>
+
+<p>
+Formal system in mathematical logic for expressing computation based on <b>function abstraction and application using variable binding and substitution</b>
+</p>
+
+<ul>
+<li class="fragment appear">Turing complete</li>
+<li class="fragment appear">May be both typed and untyped.</li>
+
+</ul>
+
+<p class="fragment (appear)">
+Father of:
+</p>
+<ul>
+<li class="fragment appear">Functional programming</li>
+<li class="fragment appear">Category Theory</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline16">
+<h3 id="orgheadline16">More abstractions - Actor Model</h3>
+<aside class="notes">
+<ul>
+<li>1973</li>
+<li>Carl Hewitt</li>
+<li>Share nothing</li>
+<li>Message passing</li>
+<li>Actors comunicate directly</li>
+
+</ul>
+
+</aside>
+
+<p>
+The actor model in computer science is a mathematical model of concurrent computation that treats "actors" as the universal primitives of <b>concurrent computation</b>.
+</p>
+
+<p>
+In response to a message that it receives, an actor can:
+</p>
+
+<ul>
+<li>make local decisions</li>
+<li>create more actors</li>
+<li>send messages</li>
+<li>determine how to respond to the next message received</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline17">
+<h3 id="orgheadline17">Why I think this is (kind of) important?</h3>
+<aside class="notes">
+<ul>
+<li>Mike Acton: "Data-Oriented Design and C++"</li>
+
+</ul>
+
+</aside>
+
+<p class="fragment (appear)">
+Platform (hardware) is implementation detail of computation
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline38">
+<h2 id="orgheadline38">JavaScript</h2>
+<aside class="notes">
+<ul>
+<li>LiveScript</li>
+<li>ECMAScript</li>
+
+</ul>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="./assets/javascript-guy.jpg" alt="javascript-guy.jpg" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline19">
+<h3 id="orgheadline19">Language</h3>
+<p>
+JavaScript is a high-level, dynamic, untyped, and interpreted programming language.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+</section>
+<section id="slide-orgheadline20">
+<h3 id="orgheadline20">MDN said..</h3>
+<aside class="notes">
+<ul>
+<li>Mozilla Developer Network</li>
+
+</ul>
+
+</aside>
+
+<p>
+JavaScript (JS) is a lightweight, interpreted, programming language with <b>first-class functions</b>.
+Most well-known as the scripting language for Web pages, many non-browser environments also use it, such as node.js and Apache CouchDB.
+JS is a <b>prototype-based</b>, <b>multi-paradigm</b>, dynamic scripting language, supporting <b>object-oriented</b>, <b>imperative</b>, and <b>declarative</b> (e.g. <b>functional programming</b>) styles.
+</p>
+
+</section>
+<section id="slide-orgheadline21">
+<h3 id="orgheadline21">Functional?</h3>
+<aside class="notes">
+<ul>
+<li>Doucglas Crockford - Athor of JS the good parts</li>
+
+</ul>
+
+</aside>
+
+<p>
+"JavaScript is a functional language with dynamic objects and familiar syntax"
+</p>
+
+<p>
+~ <b>Douglas Crockford</b>: Really. JavaScript (talk)
+</p>
+
+<p class="fragment roll-in">
+"JavaScript is functional language in the way Lisp and Scheme were functional languages."
+</p>
+
+<p class="fragment roll-in">
+~ <b>Douglas Crockford</b>: The JavaScript Programming Language (talk)
+</p>
+
+<p class="fragment roll-in">
+"Pure functional programming means functions are mathematical functions&#x2026;
+&#x2026;subrutine is allowed to do mutation and in mathematical function it doesn't happen."
+</p>
+
+<p class="fragment roll-in">
+~ <b>Douglas Crockford</b>: Monads and Gonads (talk)
+</p>
+
+</section>
+<section id="slide-orgheadline22">
+<h3 id="orgheadline22">Ask author</h3>
+<aside class="notes">
+<ul>
+<li>Brendan Eich: Designer of JS</li>
+
+</ul>
+
+</aside>
+
+<p>
+"JavaScript is kind of the chainsaw you have in place of hand on web."
+</p>
+
+<p>
+~ <b>Brendan Eich</b>: JavaScript Taking Both the High and Low Roads
+</p>
+
+
+</section>
+<section id="slide-orgheadline23">
+<h3 id="orgheadline23">JS: The Best Parts</h3>
+<aside class="notes">
+<ul>
+<li>Inspired by Lisp (Scheme) from the beginning</li>
+<li>Associative arrays and hashes (object)</li>
+
+</ul>
+
+</aside>
+
+
+<div class="figure">
+<p><img src="./assets/intro-to-js.png" alt="intro-to-js.png" />
+</p>
+</div>
+
+<p>
+~ <b>Brendan Eich</b>: An Introduction to JavaScript (talk)
+</p>
+
+</section>
+<section id="slide-orgheadline24">
+<h3 id="orgheadline24">Ehm&#x2026;</h3>
+
+<div class="figure">
+<p><img src="./assets/fray.png" alt="fray.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline25">
+<h3 id="orgheadline25">Important stuff</h3>
+<p>
+JavaScript is <b>dynamic-weak typed imperative general purpose</b> programming language with <b>first class higher order functions</b>,
+<b>prototype</b> based object orientation, <b>lexical function scoping</b> with <b>no implicit return</b> running on various <b>hosted environments</b>.
+</p>
+
+</section>
+<section id="slide-orgheadline26">
+<h3 id="orgheadline26">Weak typing</h3>
+<aside class="notes">
+<ul>
+<li>loosely typed</li>
+<li>Coercion</li>
+<li>opposite: strongly typed</li>
+
+</ul>
+
+</aside>
+
+<p>
+Performs implicit type conversion.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="javascript">1 + '1'  // =&gt; '11'
+1 - '1'  // =&gt; 0
+1 / 2    // =&gt; 0.5
+1.5 * 2  // =&gt; 3
+1 &lt; 2 &lt; 3 // =&gt; true
+3 &gt; 2 &gt; 1 // =&gt; false
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline27">
+<h3 id="orgheadline27">First class functions</h3>
+<aside class="notes">
+<ul>
+<li>function declaration vs function expression (example)</li>
+
+</ul>
+
+</aside>
+
+<p>
+This means the language supports <b>passing functions as arguments to other functions</b>, <b>returning them as the values</b> from other functions, and <b>assigning them to variables or storing them in data structures</b>.
+</p>
+
+<p>
+~ <b>Wikipedia</b>
+</p>
+
+<p class="fragment (appear)">
+<b>My definition</b>: Has fuctions expressions.
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (appear)"><code class="javascript">const identity = function(x) {
+  return x;
+}
+
+const o = {
+  val: 1,
+  get: function { return val; }
+};
+o.set = function(val) { this.val = val }
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline28">
+<h3 id="orgheadline28">Higher Order Function</h3>
+<aside class="notes">
+<ul>
+<li>Currying (Curyfikace)</li>
+<li>Apply, Bind, Call</li>
+
+</ul>
+
+</aside>
+
+<p>
+Higher-order function is a function that does at least one of the following:
+</p>
+
+<ul>
+<li>takes one or more functions as arguments</li>
+<li>returns a function as its result.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre><code class="javascript">function multiplyByTwo(fun, val) {
+     return fun(2 * val);
+}
+multiplyByTwo(function(val) { 2 * val; }, 1); // =&gt; 4
+
+function lazyMultiply(a, b) {
+    return function() {
+      return a * b;
+    };
+}
+var lazy = lazy(6, 2); // =&gt; function
+lazy(); // =&gt; 12
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline29">
+<h3 id="orgheadline29">Function Scoping</h3>
+<p>
+Variables scope ends (goes out of context) when the function returns
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="javascript">function geet() {
+     if (1 == 1) {
+        var text = 'hello';
+     }
+     console.log(text);
+     return funtion() {
+         console.log(text + ' again!');
+     };
+}
+
+var result = greet() // =&gt; logs 'hello'
+result() // =&gt; logs 'hello gain!'
+text // =&gt; undefined
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline30">
+<h3 id="orgheadline30">Lexical function scope</h3>
+<aside class="notes">
+<ul>
+<li>already saw in higher order example</li>
+<li>first implementation was in Scheme</li>
+<li>Emacs lisp doesn't have this</li>
+
+</ul>
+
+</aside>
+
+<p>
+In languages with lexical scope (also called static scope), name <b>resolution depends on the location in the source code</b> and the lexical context, which is defined by <b>where the named variable or function is defined</b>.
+</p>
+
+<p>
+#+BEGIN_SRC javascript
+function wrap(a) {
+  return function() {
+    return a'
+  }
+}
+wrap('hello')() // =&gt; 'hello'
+#+END_SRC javascript
+</p>
+
+
+<p>
+~ Wikipedia
+</p>
+
+</section>
+<section id="slide-orgheadline31">
+<h3 id="orgheadline31">ES2015 and block scope</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">function letGret() {
+      if (1 == 1) {
+         let text = 'hello';
+      }
+      console.log(text); // let is undefined
+ }
+ letGeet() // =&gt; logs nothing
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline32">
+<h3 id="orgheadline32">Prototype based OOP</h3>
+<p>
+Prototype-based programming is a style of object-oriented programming in which behaviour reuse is performed via a process of <b>reusing existing objects via delegation</b> that serve as prototypes.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="javascript">const object = {
+    property: 'value',
+    setProperty(value) {
+        this.property = value;
+    }
+};
+
+const child = Object.create(object);
+
+child.setProperty('new');
+
+console.log(child.property, object.property); // logs 'new' 'value'
+
+function meta(object) {
+    object.__proto__.hi = () =&gt; {
+        console.log('hi');
+    };
+}
+
+meta(child);
+child.hi(); // logs 'hi'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline33">
+<h3 id="orgheadline33">Java</h3>
+
+<div class="figure">
+<p><img src="./assets/java.jpg" alt="java.jpg" />
+</p>
+</div>
+
+<p class="fragment roll-in">
+<b>But RLY?</b>
+</p>
+
+</section>
+<section id="slide-orgheadline34">
+<h3 id="orgheadline34">No implicit return</h3>
+<aside class="notes">
+<ul>
+<li>almost every compile to js language tries to fix this</li>
+
+</ul>
+
+</aside>
+
+<div class="org-src-container">
+
+<pre><code class="javascript">function identity(x) {
+    return x;
+}
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">const identity = x =&gt; x;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline35">
+<h3 id="orgheadline35">Examples</h3>
+<p>
+Show me some code!
+</p>
+
+</section>
+<section id="slide-orgheadline36">
+<h3 id="orgheadline36">Conclusion</h3>
+<aside class="notes">
+<ul>
+<li>inspirated by Java, Scheme and Self (small-talk dialect)</li>
+
+</ul>
+
+</aside>
+
+<ul>
+<li>JavaScript seems to be pretty different from classic mainstream languages in some ways.</li>
+<li>However it's still as imperative as Java and has also similar syntax.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline37">
+<h3 id="orgheadline37">More resources</h3>
+<p>
+Kyle Simpsons: What the&#x2026; JavaScript?
+<a href="https://www.youtube.com/watch?v=2pL28CcEijU">https://www.youtube.com/watch?v=2pL28CcEijU</a>
+</p>
+
+<p>
+Douglas Crockford: Really. JavaScript
+<a href="https://www.youtube.com/watch?v=lTWGoL1N-Kc">https://www.youtube.com/watch?v=lTWGoL1N-Kc</a>
+</p>
+
+<p>
+Douglas Crockford: The Better Parts
+<a href="https://www.youtube.com/watch?v=PSGEjv3Tqo0">https://www.youtube.com/watch?v=PSGEjv3Tqo0</a>
+</p>
+
+<p>
+Brendan Eich: An Introduction to JavaScript
+<a href="https://www.youtube.com/watch?v=1EyRscXrehw">https://www.youtube.com/watch?v=1EyRscXrehw</a>
+</p>
+
+<p>
+Rob Ashton: Javascript sucks and it doesn't matter
+<a href="https://www.youtube.com/watch?v=PV_cFx29Xz0">https://www.youtube.com/watch?v=PV_cFx29Xz0</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline50">
+<h2 id="orgheadline50">OOP vs Functional</h2>
+<ul>
+<li class="fragment roll-in">imperative OOP</li>
+<li class="fragment roll-in">functional OOP</li>
+<li class="fragment roll-in">imperetative procedural</li>
+<li class="fragment roll-in">functional procedural</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline39">
+<h3 id="orgheadline39">Why OOP?</h3>
+<aside class="notes">
+<ul>
+<li>What is the problem with procedural programming?</li>
+<li>Changes in lower level code affects everything that depends on it</li>
+
+</ul>
+
+</aside>
+
+<p>
+What OOP brings us?
+</p>
+
+<ul>
+<li class="fragment roll-in">lower level code as higher level abstraction</li>
+<li class="fragment roll-in">application specific code as lower level abstraction</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">class Couner extends ReactComponent {
+ ...
+ render() {
+   return div(...);
+ }
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline40">
+<h3 id="orgheadline40">Classes sux so much&#x2026;</h3>
+<p>
+Let's develop dummy application
+</p>
+
+<p class="fragment (roll-in)">
+Pet store!
+</p>
+
+<ul>
+<li class="fragment roll-in">We need system for collecting informations about pets we have</li>
+<li class="fragment roll-in">We have Puppies and Kittens</li>
+<li class="fragment roll-in">We need to know their colour</li>
+<li class="fragment roll-in">We need to know their gender</li>
+<li class="fragment roll-in">We need to track their age</li>
+<li class="fragment roll-in">We better add number of legs fore some reason</li>
+<li class="fragment roll-in">We didn't start making mone/not read need to build <b>MVP</b> first</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline41">
+<h3 id="orgheadline41">Minimum Product</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">class Animal {
+  constructor(gender, age, colour, numberOfLegs = 4) {
+    this.gender = gender;
+    this.age = age;
+    this.colour = colour;
+    this.numberOfLegs = numberOfLegs;
+  }
+};
+class Kitten extends Animal {};
+class Puppy extends Animal {}
+
+kitten = new Puppy("female", "2 weeks", "white");
+puppy = new Puppy("male", "2 monts", "black");
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline42">
+<h3 id="orgheadline42">Next iteration</h3>
+<p>
+System is great! We're doing well it's time to expand. We now have so many puppies we need to distinguish race.
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">class Puppy {
+  constructor(gender, age, colour, race) {
+    super(gender, age, 4);
+    this.race = race;
+  }
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline43">
+<h3 id="orgheadline43">Fish &amp; Snakes</h3>
+<p>
+We have great opportunity to starts selling fishes and snakes. Let's extend our store.
+</p>
+
+<ul>
+<li class="fragment roll-in">wait? Do we want to have colour and number of legs as attr of fish and snakes?
+<ul>
+<li class="fragment roll-in">sure not..</li>
+
+</ul></li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">class Mammal extends Animal {
+  constructor(..., colour, numberOfLegs, ...) {....}
+}
+class Puppy extends Mammal...
+class Kitten extends Mammal...
+class Fish extends Animal...
+class Snake extends Animal...
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline44">
+<h3 id="orgheadline44">Getting worse</h3>
+<p>
+Fishes and snakes are Hit! People in big city (like Brno) loves them. This is why we want to expand this kind even more.
+For some reason we want to sell Whales and Turtles.
+</p>
+
+<ul>
+<li class="fragment roll-in">But wait? Is whale fish or mammal?</li>
+<li class="fragment roll-in">And can we group snakes and turtles as reptiles</li>
+<li class="fragment roll-in">Do we now want to group animals by environment they live in (e.g. water)</li>
+<li class="fragment roll-in">This is stupid&#x2026; I'm leaving</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline45">
+<h3 id="orgheadline45">Good code</h3>
+
+<div class="figure">
+<p><img src="./assets/good_code.png" alt="good_code.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline46">
+<h3 id="orgheadline46">The Problem with Classes</h3>
+<p>
+Class oriented design forces you to make decisions you're not ready to make yet.
+</p>
+
+<p>
+Polymorphism is good for logic, but not for data.
+</p>
+
+</section>
+<section id="slide-orgheadline47">
+<h3 id="orgheadline47">Data</h3>
+
+<div class="figure">
+<p><img src="./assets/animals.png" alt="animals.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline48">
+<h3 id="orgheadline48">OOP thinking</h3>
+
+<div class="figure">
+<p><img src="./assets/animals-oop.png" alt="animals-oop.png" />
+</p>
+</div>
+
+<p class="fragment (roll-in)">
+Logic is <b>coupled with data</b>.
+</p>
+
+<p class="fragment (roll-in)">
+&#x2026;and data changes over time.
+</p>
+
+</section>
+<section id="slide-orgheadline49">
+<h3 id="orgheadline49">More resources</h3>
+<p>
+"uncle" Bob Martin: SOLID Principles of Object Oriented and Agile Design
+<a href="https://www.youtube.com/watch?v=TMuno5RZNeE">https://www.youtube.com/watch?v=TMuno5RZNeE</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline65">
+<h2 id="orgheadline65">Functional programming</h2>
+<p>
+In computer science, functional programming is a programming paradigm—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+</section>
+<section id="slide-orgheadline51">
+<h3 id="orgheadline51">Function</h3>
+<p>
+In mathematics, a function is a relation between a set of inputs and a set of permissible outputs with the property that each input is related to exactly one output.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+</section>
+<section id="slide-orgheadline52">
+<h3 id="orgheadline52">Functions</h3>
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">function(x) {
+  return 3 * x + 5;
+}
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">function(x) {
+  a++;
+  return a * x + 5;
+}
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-orgheadline53">
+<h3 id="orgheadline53">Fibonacci number</h3>
+<p>
+F(1) = 1
+</p>
+
+<p>
+F(2) = 1
+</p>
+
+<p>
+F(n) = F(n-1) + F(n-2)
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">function fib(n) {
+  if (n &lt;= 1) { return n; }
+  return fib(n-1) + fib(n-2);
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline54">
+<h3 id="orgheadline54">Imperative optimization</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">function fib(n) {
+  const fibs = [0, 1];
+  for (let i=2; i &lt;= n; i++) {
+    let current = fibs[i-1] + fibs[i-2]
+    fibs.push(current)
+  }
+  return fibs[n];
+}
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline55">
+<h3 id="orgheadline55">Tail recursion</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">function fib(n) {
+  if (n &lt;= 1) { return n; }
+
+  // i =&gt; iterations left
+  // a=fib(n-2), b=fib(n-1)
+  function tailFib(i, a, b) {
+     if (i===1) { return a + b; }
+     return tailFib(i-1, b, a + b);
+  }
+  return tailFib(n-1, 0, 1);
+}
+</code></pre>
+</div>
+
+
+<div class="figure">
+<p><img src="./assets/call_stack_size.png" alt="call_stack_size.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline56">
+<h3 id="orgheadline56">Lodash / Underscore</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">_.map([1, 2, 3], function(n) { return n * 3; });
+// ➜ [3, 6, 9]
+</code></pre>
+</div>
+
+<p>
+I think that underscore does a terrible job of saying function.. you know it says it's functional but it's not really when you compare it to real functional language.
+</p>
+
+<p>
+~ Brian Lonsdorf: Hey Underscore, You're Doing it Wrong!
+</p>
+
+</section>
+<section id="slide-orgheadline57">
+<h3 id="orgheadline57">Curring</h3>
+<p>
+In mathematics and computer science, currying is the technique of translating the evaluation of a function that takes multiple arguments (or a tuple of arguments) into evaluating a sequence of functions, each with a single argument.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">function add(a) {
+  return function(b) {
+    return a + b;
+  }
+}
+function addTwo = add(2);
+add(2)(3); // =&gt; 5
+addTwo(3); // =&gt; 5
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline58">
+<h3 id="orgheadline58">Currying vs underscore</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">_.map([1, 2, 3], n =&gt; n * 3; );
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">const map = function(fce) {
+  // using native array map
+  return arr =&gt; arr.map(fce)
+}
+map(a =&gt; a + 2)([1,2,3]);
+// =&gt; [3,4,5]
+
+const addTwo = a =&gt; a + 2;
+const addTwos = map(addTwo)
+addTwos([1,2,3]);
+// =&gt; [3,4,5]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline59">
+<h3 id="orgheadline59">Lodash</h3>
+<aside class="notes">
+<p>
+Wu.js
+</p>
+
+</aside>
+
+<div class="org-src-container">
+
+<pre><code class="javascript">// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+// Load the fp build for immutable auto-curried iteratee-first data-last methods.
+var fp = require('lodash/fp');
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline60">
+<h3 id="orgheadline60">JavaScript native curring</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">function add(a, b) {
+  return a + b;
+}
+const addTwo = add.bind(undefined, 2);
+addTwo(3) // =&gt; 5
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline61">
+<h3 id="orgheadline61">Function composition</h3>
+<p>
+(g ∘ f)(x) = g(f(x))
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">function compose(f, g) {
+  return x =&gt; f(g(x));
+}
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">const greet = name =&gt; "hi: " + name;
+const exclaim = statement =&gt; statement.toUpperCase() + "!";
+const welcome = _.compose(greet, exclaim);
+welcome('moe');
+// =&gt; 'hi: MOE!'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline62">
+<h3 id="orgheadline62">Functional thinking</h3>
+
+<div class="figure">
+<p><img src="./assets/animals-functional.png" alt="animals-functional.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline63">
+<h3 id="orgheadline63">Solving problems functionaly</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">function Animal(gender, age, color, legs) {
+  return {
+    gender: gender,
+    age: age,
+    color: color,
+    legs: legs
+  };
+}
+function Kitten(geneder, age, color) {
+  return Animal(gender, age, colour, 4)
+}
+function Fish(gender, age) {
+  return Animal(gender, age)
+}
+function environment(animal) {
+  return animal.legs ? 'ground' : 'water';
+}
+
+const neo = Fish('male', 10);
+environment(neo); // =&gt; 'water
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline64">
+<h3 id="orgheadline64">More resources</h3>
+<p>
+Brian Lonsdorf: Hey Underscore, You're Doing It Wrong!
+<a href="https://www.youtube.com/watch?v=m3svKOdZijA">https://www.youtube.com/watch?v=m3svKOdZijA</a>
+</p>
+
+<p>
+Rich Hickey: The Value of Values
+<a href="https://www.youtube.com/watch?v=-6BsiVyC1kM">https://www.youtube.com/watch?v=-6BsiVyC1kM</a>
+</p>
+
+<p>
+"pragmatic" Dave Thomas: Think Different
+<a href="https://www.youtube.com/watch?v=5hDVftaPQwY">https://www.youtube.com/watch?v=5hDVftaPQwY</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline78">
+<h2 id="orgheadline78">Type Safety</h2>
+<p>
+In computer science, type safety is the extent to which a programming language discourages or <b>prevents type errors</b>.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+</section>
+<section id="slide-orgheadline66">
+<h3 id="orgheadline66">Types &amp; Memory</h3>
+
+<div class="figure">
+<p><img src="./assets/cpp_types.png" alt="cpp_types.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline67">
+<h3 id="orgheadline67">Java primitives</h3>
+
+<div class="figure">
+<p><img src="./assets/java_types.png" alt="java_types.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline68">
+<h3 id="orgheadline68">Type safety</h3>
+<ul>
+<li>C</li>
+<li>C++</li>
+<li>Java</li>
+<li>JavaScript</li>
+<li>Python</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline69">
+<h3 id="orgheadline69"><del>Type</del> Memory safety</h3>
+<ul>
+<li>C - <b>unsafe</b></li>
+<li>C++ - <b>unsafe</b></li>
+<li>Java - <b>safe</b></li>
+<li>JavaScript - <b>safe</b></li>
+<li>Python - <b>safe</b></li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline70">
+<h3 id="orgheadline70">Sets, Type theory, Category theory</h3>
+
+<div class="figure">
+<p><img src="./assets/russels_paradox.png" alt="russels_paradox.png" />
+</p>
+</div>
+
+<p class="fragment (roll-in)">
+Russels's paradox (naive set theory)
+</p>
+
+</section>
+<section id="slide-orgheadline71">
+<h3 id="orgheadline71">Runtime errors</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">const map = function (fce) {
+  return arr =&gt; arr.map(fce)
+}
+
+const addTwo = (a) =&gt; { a + 2; }
+const addTwos = map(addTwo)
+
+addTwos([[1,2], [3]]);
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">[undefined, undefined]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline72">
+<h3 id="orgheadline72">..Runtime errors</h3>
+<div class="org-src-container">
+
+<pre><code class="javascript">addTwos('hello!');
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">Uncaught TypeError: arr.map is not a function
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline73">
+<h3 id="orgheadline73">Functions for types</h3>
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">const addTwo = (a) =&gt; { a + 2; }
+
+Array.prototype.addTwos = function() {
+  return this.map((val) =&gt; {
+    if (Array.isArray(val)) {
+      return val.addTwos();
+    }
+    return val + 2;
+  });
+}
+
+[[1,2], 3].addTwos();
+// =&gt; [[3,4],5]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline74">
+<h3 id="orgheadline74">Functor</h3>
+<p>
+In mathematics, a functor is a type of mapping between categories which is applied in category theory. Functors can be thought of as homomorphisms between categories.
+</p>
+
+<p>
+~ Wikipedia
+</p>
+
+<div class="org-src-container">
+
+<pre class="fragment (roll-in)"><code class="javascript">[1,2,3].map(a =&gt; a + 1)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgheadline75">
+<h3 id="orgheadline75">Lets implement some functor&#x2026; in JS</h3>
+<p>
+Maybe&#x2026;
+</p>
+
+</section>
+<section id="slide-orgheadline76">
+<h3 id="orgheadline76">Learn more</h3>
+<p>
+Brian Lonsdorf: Monads, Monoids and Make Believe
+</p>
+
+<p>
+<a href="https://www.youtube.com/watch?v=awEGF8giTcE">https://www.youtube.com/watch?v=awEGF8giTcE</a>
+</p>
+
+</section>
+<section id="slide-orgheadline77">
+<h3 id="orgheadline77">Compile to JS?</h3>
+<ul>
+<li>Elm</li>
+<li>PureScript</li>
+<li>ClojureScript</li>
+<li>LiveScript</li>
+<li>Scala.js</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline79">
+<h2 id="orgheadline79">Thank you!</h2>
+<p>
+Questions?
+</p>
+
+<p>
+<a href="https://github.com/turboMaCk/Slides_AlmostFunctional">https://github.com/turboMaCk/Slides_AlmostFunctional</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/lib/js/head.min.js"></script>
+<script src="./reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
